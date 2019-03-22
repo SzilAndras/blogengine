@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 public class Categories {
@@ -16,6 +17,13 @@ public class Categories {
     @Column(name = "name", unique = true)
     @Size(min = 3, max = 6)
     private String name;
+
+    @ManyToMany
+    @JoinTable(
+            name = "post_category",
+            joinColumns = @JoinColumn(name = "category_id"),
+            inverseJoinColumns = @JoinColumn(name = "post_id"))
+    Set<Posts> categoriedPosts;
 
     public Categories() {
     }

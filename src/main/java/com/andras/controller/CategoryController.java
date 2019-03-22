@@ -24,4 +24,15 @@ public class CategoryController {
         this.categoryRepository.save(cat);
         return this.categoryRepository.findAll();
     }
+
+    @DeleteMapping(value = "/delete")
+    public List<Categories> deleteCategory(@RequestBody Categories cat){
+        if(this.categoryRepository.existsById(cat.getCategoryId())){
+            this.categoryRepository.delete(cat);
+            return this.categoryRepository.findAll();
+        } else {
+            //TODO
+            return  this.categoryRepository.findAll();
+        }
+    }
 }
